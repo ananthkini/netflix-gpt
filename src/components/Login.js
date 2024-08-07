@@ -16,7 +16,7 @@ const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   const toggleSignIn = () => {
@@ -44,7 +44,6 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           console.log(user);
-          navigate("browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -79,6 +78,10 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
+              setErrorMessage('Sign up successful, Please Sign In now')
+              setTimeout(()=> {
+                setIsSignIn(true)
+              },1000)
             })
             .catch((error) => {
               // An error occurred

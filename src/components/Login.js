@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
-import Body from "./Body";
 import { checkValidData } from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
@@ -8,14 +7,13 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import CONSTANTS from "../utils/constants";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-
 
   const dispatch = useDispatch();
 
@@ -43,7 +41,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -51,7 +48,6 @@ const Login = () => {
           errorCode === "auth/invalid-credential"
             ? setErrorMessage("Invalid username or password")
             : setErrorMessage("");
-          console.log(errorCode, " - ", errorMessage);
         });
     } else {
       createUserWithEmailAndPassword(
@@ -62,11 +58,9 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          console.log(user);
           updateProfile(auth.currentUser, {
             displayName: fullName.current.value,
-            photoURL:
-              "https://occ-0-1492-3662.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABfn5oPOIGVSlH36wxaH-5oL5d8wztZgxFQeRq_LSU9RKySbIUMGZ2118vOWyS6Xl3wkKoIHBIknKKSY7YjP3lhLbaaMR3u8.png?r=72f",
+            photoURL: CONSTANTS.photoURL,
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -78,10 +72,10 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              setErrorMessage('Sign up successful, Please Sign In now')
-              setTimeout(()=> {
-                setIsSignIn(true)
-              },1000)
+              setErrorMessage("Sign up successful, Please Sign In now");
+              setTimeout(() => {
+                setIsSignIn(true);
+              }, 1000);
             })
             .catch((error) => {
               // An error occurred
@@ -90,7 +84,6 @@ const Login = () => {
         })
         .catch((error) => {
           const errorCode = error.code;
-          const errorMessage = error.message;
           errorCode === "auth/email-already-in-use"
             ? setErrorMessage("Email already exists")
             : setErrorMessage("");
@@ -103,7 +96,7 @@ const Login = () => {
       <div className="absolute">
         <img
           alt="logo"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/826348c2-cdcb-42a0-bc11-a788478ba5a2/6d20b198-e7ab-4e9f-a1aa-666faa0298f9/IN-en-20240729-POP_SIGNUP_TWO_WEEKS-perspective_WEB_a67d8c9e-8121-4a74-98e4-8005eb2df227_large.jpg"
+          src={CONSTANTS.bodyBG}
         />
       </div>
       <form className="absolute p-12 bg-black w-3/12 my-36 mx-auto right-0 left-0 text-white roundd-lg bg-opacity-80">

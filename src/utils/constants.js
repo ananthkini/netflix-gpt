@@ -13,6 +13,7 @@ const CONSTANTS = {
         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYTM5MDZlYjJhYTEyNTA3MGViMDU4NDg2MjQ4N2YxZSIsIm5iZiI6MTcyMzA5NDk3Mi40NjQ1ODEsInN1YiI6IjY2YjQ1NmJmNmJmNjRhM2JlMjM2NDczZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.G4v1KsnZu2WpM6eBtFzoC-Wq9p9ki6y8Awil9WfQD7M",
     },
   },
+  POSTER_URL:'https://image.tmdb.org/t/p/w500'
 };
 
 export default CONSTANTS;
